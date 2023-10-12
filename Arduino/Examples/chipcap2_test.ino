@@ -14,7 +14,6 @@ CFF_ChipCap2 cc2 = CFF_ChipCap2();
   
 void setup()
 {
-  
   Serial.begin(9600);
   cc2.begin();
   
@@ -48,26 +47,22 @@ void setup()
 
 void loop()
 {
+if (cc2.dataReady() == true)
+{
+  cc2.readSensor();
   
-  while (1)
-  {
-    if (cc2.dataReady() == true)
-    {
-      cc2.readSensor();
-      
-      Serial.print("Humidity: ");
-      Serial.print(cc2.humidity);
-      Serial.print("\n");
+  Serial.print("Humidity: ");
+  Serial.print(cc2.humidity);
+  Serial.print("\n");
+
+  Serial.print("Temperature C: ");
+  Serial.print(cc2.temperatureC);
+  Serial.print("\n");
   
-      Serial.print("Temperature C: ");
-      Serial.print(cc2.temperatureC);
-      Serial.print("\n");
-      
-      Serial.print("Temperature F: ");
-      Serial.print(cc2.temperatureF);
-      Serial.print("\n");
-    }
-    delay(5000);
-  }
+  Serial.print("Temperature F: ");
+  Serial.print(cc2.temperatureF);
+  Serial.print("\n");
+}
+delay(5000);
 }
 
